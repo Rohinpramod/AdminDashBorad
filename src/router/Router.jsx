@@ -1,14 +1,12 @@
 import React from "react";
-import { Route, Routes } from "react-router";
+import { Route, Routes, useNavigate } from "react-router";
 import Home from "../pages/Home/Home";
 import Login from "../componentes/login/Login";
 import Signup from "../componentes/signup/Signup";
-import Navbar from "../componentes/header/Navbar";
-import Footer from "../componentes/footer/Footer";
-import AllRestaurant from "../pages/Restaurant/AllRestaurant";
 import DefaultLayout from "../layout/DefaultLayout";
 import NotFound from "../componentes/NotFound/NoteFound";
 import EditRestaurant from "../pages/Restaurant/EditRestaurant";
+import AllRestaurant from "../pages/Restaurant/AllRestaurant";
 
 const AdminRouter = () => {
   return (
@@ -21,15 +19,23 @@ const AdminRouter = () => {
           element={
             <DefaultLayout>
               <Routes>
-              <Route path="/home" element={<Home />} />
-              <Route path="/allrestaurants" element={<AllRestaurant />} />
-              <Route path="/editrestaurants" element={<EditRestaurant />}/>
-              <Route path="*" element={<NotFound />} />
+                <Route
+                  path="/home"
+                  element={<Home pageTitle="Dashboard" />}
+                />
+                <Route
+                  path="/allrestaurants"
+                  element={<AllRestaurant pageTitle="All Restaurants" />}
+                />
+                <Route
+                  path="/edit-restaurant"
+                  element={<EditRestaurant pageTitle="Edit Restaurant" />}
+                />
+                <Route path="*" element={<NotFound pageTitle="404 - Not Found" />} />
               </Routes>
             </DefaultLayout>
           }
         />
-        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

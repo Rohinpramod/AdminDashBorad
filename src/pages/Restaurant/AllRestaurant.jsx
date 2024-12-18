@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { axiosInstance } from "../../config/axiosInstance";
-import { data, useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
 import DataTable from "react-data-table-component";
 import { Pencil, Trash2 } from "lucide-react";
-
 
 const AllRestaurants = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const navigate = useNavigate();
-  const {id} = useParams();
+  const navigate = useNavigate(); // Initialize navigate
 
   const fetchRestaurants = async () => {
     try {
@@ -28,8 +26,8 @@ const AllRestaurants = () => {
     navigate("/add-restaurant");
   };
 
-  const handleEditRestaurant = (id) => {
-    navigate(`/editrestaurants/${id}`) ;
+  const handleEditRestaurant = (row) => {
+    navigate(`/edit-restaurant`,{state:{data:row}}); 
   };
 
   const handleDeleteRestaurant = async (id) => {
@@ -48,9 +46,7 @@ const AllRestaurants = () => {
 
   useEffect(() => {
     fetchRestaurants();
-  }, [id]);
-
-  
+  }, []);
 
   const columns = [
     {
@@ -84,11 +80,11 @@ const AllRestaurants = () => {
         <div className="flex space-x-2">
           <Pencil
             className="w-4 h-4 text-yellow-500 cursor-pointer"
-            onClick={() => handleEditRestaurant(data._id)}
+            onClick={() => handleEditRestaurant(row)} 
           />
           <Trash2
             className="w-4 h-4 text-red-500 cursor-pointer"
-            onClick={() => handleDeleteRestaurant(row._id)}
+            onClick={() => handleDeleteRestaurant(row._id)} 
           />
         </div>
       ),
@@ -98,13 +94,12 @@ const AllRestaurants = () => {
   return (
     <div className="min-h-screen p-6">
       <div className="max-w-7xl mx-auto bg-white shadow-lg rounded-lg p-6">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-800">All Restaurants</h1>
+        <div className="flex justify-end items-center mb-6">
           <button
             onClick={handleAddRestaurant}
             className=" h-[30px] bg-black text-white text-sm px-3 rounded-lg hover:bg-gray-800 focus:outline-none"
           >
-            Add New 
+            Add New
           </button>
         </div>
 

@@ -8,6 +8,7 @@ import Footer from "../componentes/footer/Footer";
 import AllRestaurant from "../pages/Restaurant/AllRestaurant";
 import DefaultLayout from "../layout/DefaultLayout";
 import NotFound from "../componentes/NotFound/NoteFound";
+import EditRestaurant from "../pages/Restaurant/EditRestaurant";
 
 const AdminRouter = () => {
   return (
@@ -22,6 +23,7 @@ const AdminRouter = () => {
               <Routes>
               <Route path="/home" element={<Home />} />
               <Route path="/allrestaurants" element={<AllRestaurant />} />
+              <Route path="/editrestaurants" element={<EditRestaurant />}/>
               <Route path="*" element={<NotFound />} />
               </Routes>
             </DefaultLayout>

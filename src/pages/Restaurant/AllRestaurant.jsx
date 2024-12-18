@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { axiosInstance } from "../../config/axiosInstance";
-import { useNavigate } from "react-router";
+import { data, useNavigate, useParams } from "react-router";
 import DataTable from "react-data-table-component";
 import { Pencil, Trash2 } from "lucide-react";
+
 
 const AllRestaurants = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const {id} = useParams();
 
   const fetchRestaurants = async () => {
     try {
@@ -27,7 +29,7 @@ const AllRestaurants = () => {
   };
 
   const handleEditRestaurant = (id) => {
-    window.location.href = `/edit-restaurant/${id}`;
+    navigate(`/editrestaurants/${id}`) ;
   };
 
   const handleDeleteRestaurant = async (id) => {
@@ -46,7 +48,9 @@ const AllRestaurants = () => {
 
   useEffect(() => {
     fetchRestaurants();
-  }, []);
+  }, [id]);
+
+  
 
   const columns = [
     {
@@ -80,11 +84,11 @@ const AllRestaurants = () => {
         <div className="flex space-x-2">
           <Pencil
             className="w-4 h-4 text-yellow-500 cursor-pointer"
-            onClick={() => handleEditRestaurant(row.id)}
+            onClick={() => handleEditRestaurant(data._id)}
           />
           <Trash2
             className="w-4 h-4 text-red-500 cursor-pointer"
-            onClick={() => handleDeleteRestaurant(row.id)}
+            onClick={() => handleDeleteRestaurant(row._id)}
           />
         </div>
       ),

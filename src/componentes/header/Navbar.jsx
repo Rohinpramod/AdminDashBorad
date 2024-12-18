@@ -1,10 +1,9 @@
 import React from 'react';
 
-
 const Navbar = () => {
   return (
-    <div className="navbar shadow-md bg-gray-900 text-white fixed top-0 left-0 lg:left-56 right-0 z-40">
-      <div className="container mx-auto flex justify-end ml-28 items-center px-4">
+    <div className="navbar shadow-lg  text-white fixed top-0 md:left-64 lg:left-56 right-0 z-40">
+      <div className="container mx-auto relative left-3/4 items-center">
         <div className="flex-none gap-4">
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar relative">

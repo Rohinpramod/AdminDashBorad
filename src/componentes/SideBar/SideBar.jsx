@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { ChefHat, HomeIcon, Salad, ShoppingCartIcon, TagIcon } from "lucide-react";
 
 function SideBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,11 +10,11 @@ function SideBar() {
   const toggleSidebar = () => setIsOpen(!isOpen);
 
   const menuItems = [
-    { path: '/home', label: 'Dashboard' },
-    { path: '/allrestaurants', label: 'All Restaurants' },
-    { path: '/allmenuitems', label: 'All MenuItems' },
-    { path: '/allcoupons', label: 'All Coupons' },
-    { path: '/allrestaurantorders', label: 'All Restaurant Orders' },
+    { path: '/home', label: 'Dashboard', icon: <HomeIcon className="w-5 h-5" /> },
+    { path: '/allrestaurants', label: 'All Restaurants', icon: <ChefHat className="w-5 h-5" /> },
+    { path: '/allmenuitems', label: 'All MenuItems', icon: <Salad className="w-5 h-5" /> },
+    { path: '/allcoupons', label: 'All Coupons', icon: <TagIcon className="w-5 h-5" /> },
+    { path: '/allrestaurantorders', label: 'All Restaurant Orders', icon: <ShoppingCartIcon className="w-5 h-5" /> },
   ];
 
   return (
@@ -30,10 +31,11 @@ function SideBar() {
             <li key={item.path}>
               <Link to={item.path}>
                 <div
-                  className={`p-2 rounded-lg w-full text-left hover:bg-gray-700 transition ${
+                  className={`flex items-center p-2 rounded-lg w-full text-left hover:bg-gray-700 transition ${
                     location.pathname === item.path ? 'bg-gray-700' : ''
                   }`}
                 >
+                  <span className="mr-3">{item.icon}</span>
                   {item.label}
                 </div>
               </Link>
@@ -46,7 +48,7 @@ function SideBar() {
       <div className="flex-1 md:ml-64 p-6">
         {/* Mobile Hamburger Icon */}
         <button
-          className={`md:hidden text-white p-4  absolute top-4 left-4 z-50`}
+          className={`md:hidden ${isOpen ?"text-white":"text-gray-900"} p-4 absolute top-4 left-4 z-50`}
           onClick={toggleSidebar}
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

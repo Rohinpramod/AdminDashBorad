@@ -1,27 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { axiosInstance } from '../../config/axiosInstance';
-import { useNavigate } from 'react-router';
+import React, { useState, useEffect } from "react";
+import { axiosInstance } from "../../config/axiosInstance";
+import { useNavigate } from "react-router";
+import DataTable from "react-data-table-component";
+import { Pencil, Trash2 } from "lucide-react";
 
 const AllRestaurants = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const fetchRestaurants = async () => {
     try {
       setLoading(true);
-      const response = await axiosInstance.get('/restaurant');
+      const response = await axiosInstance.get("/restaurant");
       setRestaurants(response.data);
     } catch (err) {
-      setError('An error occurred while fetching restaurants.');
+      setError("An error occurred while fetching restaurants.");
     } finally {
       setLoading(false);
     }
   };
 
   const handleAddRestaurant = () => {
-    useNavigate('/add-restaurant');
+    navigate("/add-restaurant");
   };
 
   const handleEditRestaurant = (id) => {
@@ -29,13 +31,15 @@ const AllRestaurants = () => {
   };
 
   const handleDeleteRestaurant = async (id) => {
-    if (window.confirm('Are you sure you want to delete this restaurant?')) {
+    if (window.confirm("Are you sure you want to delete this restaurant?")) {
       try {
         await axiosInstance.delete(`/restaurant/${id}`);
-        setRestaurants((prev) => prev.filter((restaurant) => restaurant.id !== id));
-        alert('Restaurant deleted successfully.');
+        setRestaurants((prev) =>
+          prev.filter((restaurant) => restaurant.id !== id)
+        );
+        alert("Restaurant deleted successfully.");
       } catch {
-        alert('Failed to delete restaurant. Please try again.');
+        alert("Failed to delete restaurant. Please try again.");
       }
     }
   };
@@ -44,6 +48,49 @@ const AllRestaurants = () => {
     fetchRestaurants();
   }, []);
 
+  const columns = [
+    {
+      name: "#",
+      selector: (row, index) => index + 1,
+      sortable: true,
+    },
+    {
+      name: "Name",
+      selector: (row) => row.name,
+      sortable: true,
+    },
+    {
+      name: "Cuisine",
+      selector: (row) => row.cuisine,
+      sortable: true,
+    },
+    {
+      name: "Location",
+      selector: (row) => row.location,
+      sortable: true,
+    },
+    {
+      name: "Status",
+      selector: (row) => row.status,
+      sortable: true,
+    },
+    {
+      name: "Actions",
+      cell: (row) => (
+        <div className="flex space-x-2">
+          <Pencil
+            className="w-4 h-4 text-yellow-500 cursor-pointer"
+            onClick={() => handleEditRestaurant(row.id)}
+          />
+          <Trash2
+            className="w-4 h-4 text-red-500 cursor-pointer"
+            onClick={() => handleDeleteRestaurant(row.id)}
+          />
+        </div>
+      ),
+    },
+  ];
+
   return (
     <div className="min-h-screen p-6">
       <div className="max-w-7xl mx-auto bg-white shadow-lg rounded-lg p-6">
@@ -51,7 +98,7 @@ const AllRestaurants = () => {
           <h1 className="text-3xl font-bold text-gray-800">All Restaurants</h1>
           <button
             onClick={handleAddRestaurant}
-            className="btn btn-primary"
+            className="btn bg-black text-white text-sm px-3 rounded-lg hover:bg-gray-800 focus:outline-none"
           >
             Add New Restaurant
           </button>
@@ -64,47 +111,13 @@ const AllRestaurants = () => {
         ) : error ? (
           <p className="text-center text-red-500">{error}</p>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="table table-zebra w-full">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Cuisine</th>
-                  <th>Location</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {restaurants.map((restaurant, index) => (
-                  <tr key={restaurant.id}>
-                    <th>{index + 1}</th>
-                    <td>{restaurant.name}</td>
-                    <td>{restaurant.cuisine}</td>
-                    <td>{restaurant.location}</td>
-                    <td>{restaurant.status}</td>
-                    <td>
-                      <div className="flex space-x-2">
-                        <button
-                          onClick={() => handleEditRestaurant(restaurant.id)}
-                          className="btn btn-warning btn-sm"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => handleDeleteRestaurant(restaurant.id)}
-                          className="btn btn-error btn-sm"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <DataTable
+            columns={columns}
+            data={restaurants}
+            pagination
+            highlightOnHover
+            responsive
+          />
         )}
       </div>
     </div>

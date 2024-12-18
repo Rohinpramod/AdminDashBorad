@@ -98,7 +98,7 @@ const AllRestaurants = () => {
           <h1 className="text-3xl font-bold text-gray-800">All Restaurants</h1>
           <button
             onClick={handleAddRestaurant}
-            className="btn bg-black text-white text-sm px-3 rounded-lg hover:bg-gray-800 focus:outline-none"
+            className=" h-[30px] bg-black text-white text-sm px-3 rounded-lg hover:bg-gray-800 focus:outline-none"
           >
             Add New Restaurant
           </button>

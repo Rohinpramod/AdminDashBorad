@@ -100,7 +100,7 @@ const AllRestaurants = () => {
             onClick={handleAddRestaurant}
             className=" h-[30px] bg-black text-white text-sm px-3 rounded-lg hover:bg-gray-800 focus:outline-none"
           >
-            Add New Restaurant
+            Add New 
           </button>
         </div>
 

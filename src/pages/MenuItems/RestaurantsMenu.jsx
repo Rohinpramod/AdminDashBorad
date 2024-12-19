@@ -22,7 +22,7 @@ const RestaurantsMenu = () => {
   };
 
   const handleRestaurantClick = (data) => {
-    navigate(`/restautarnt-menu/${data._id}`);
+    navigate(`/restaurant-menu/${data._id}`);
   };
 
   useEffect(() => {

@@ -34,11 +34,11 @@ const AdminRouter = () => {
                   element={<EditRestaurant pageTitle="Edit Restaurant" />}
                 />
                 <Route 
-                  path="/all-restaurants-name"
+                  path="/all-restaurants"
                   element={< RestaurantsMenu pageTitle="All Restaurants And MenuItems" />}
                 />
                  <Route 
-                  path="/restautarnt-menu/:id"
+                  path="/restaurant-menu/:id"
                   element={< MenuItems pageTitle="MenuItems" />}
                 />
                 <Route path="*" element={<NotFound pageTitle="404 - Not Found" />} />

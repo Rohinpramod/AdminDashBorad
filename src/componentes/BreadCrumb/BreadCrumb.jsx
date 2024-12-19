@@ -11,9 +11,9 @@ function BreadCrumb({children}) {
     // Generate dynamic breadcrumb items based on the current route
     const generateBreadcrumbItems = () => {
       const pathSegments = location.pathname.split("/").filter((path) => path);
-    
       const breadcrumbItems = pathSegments.map((segment, index) => {
-        const isLastSegment = index === pathSegments.length - 1;
+        if (segment.match(/^[a-f0-9]{24}$/i)) return null;
+        // const isLastSegment = index === pathSegments.length - 1;
         const path = `/${pathSegments.slice(0, index + 1).join("/")}`;
     
         return {
@@ -81,7 +81,7 @@ function BreadCrumb({children}) {
               color="text.primary"
               className="font-medium"
             >
-              {item.label}
+              {item?.label}
             </Typography>
           ) : (
             <Link
@@ -91,7 +91,7 @@ function BreadCrumb({children}) {
               onClick={() =>  handleBreadcrumbClick(item.path)}
               className="cursor-pointer hover:text-blue-500"
             >
-              {item.label}
+              {item?.label}
             </Link>
           )
         ))}

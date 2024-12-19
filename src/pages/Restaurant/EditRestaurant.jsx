@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   TextField,
   Button,
@@ -9,13 +9,15 @@ import {
   Grid,
   Box,
 } from "@mui/material";
+import { axiosInstance } from "../../config/axiosInstance";
 
 const EditRestaurant = () => {
+  const {id} = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  const { data } = location.state || {};
-  const isEdit = Boolean(data);
-
+  const  data  = location?.state?.data;
+  const isEdit = Boolean(data); // Check if it's an edit operation
+console.log("dataaa",data);
   const [formData, setFormData] = useState({
     name: data?.name || "",
     cuisine: data?.cuisine || "",
@@ -26,6 +28,10 @@ const EditRestaurant = () => {
       email: data?.contact?.email || "",
     },
   });
+
+  
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,28 +58,17 @@ const EditRestaurant = () => {
 
     try {
       const endpoint = isEdit
-        ? `/restaurant/${data.id}` // Update endpoint
-        : `/restaurants/`; // Create endpoint
+        ? `/restaurant/${data._id}`
+        : `/restaurant`; 
 
-      const method = isEdit ? "PUT" : "POST";
-
-      const response = await fetch(endpoint, {
+      const method = isEdit ? "PATCH" : "POST";
+      const response = await axiosInstance.request({
         method,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token if needed
-        },
-        body: JSON.stringify(formData),
+        url: endpoint,
+        data: formData,
       });
-
-      if (!response.ok) {
-        throw new Error("Failed to save restaurant details");
-      }
-
-      const result = await response.json();
-      console.log(result);
-
-      navigate("/restaurants");
+      console.log(response);
+      navigate("/allrestaurants");
     } catch (error) {
       console.error("Error saving restaurant:", error);
     }
@@ -81,90 +76,110 @@ const EditRestaurant = () => {
 
   return (
     <Grid container justifyContent="center" alignItems="center" style={{ minHeight: "100vh" }}>
-      <Grid item xs={12} sm={8} md={6} lg={4}>
-        <Box
-          sx={{
-            p: 4,
-            boxShadow: 3,
-            borderRadius: 2,
-            bgcolor: "background.paper",
-          }}
-        >
-          <Typography variant="h5" component="h2" gutterBottom>
-            {isEdit ? "Edit Restaurant" : "Add New Restaurant"}
-          </Typography>
-          <form onSubmit={handleSubmit}>
-            <FormControl fullWidth margin="normal">
-              <TextField
-                size="small"
-                label="Restaurant Name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
-            </FormControl>
-            <FormControl fullWidth margin="normal">
-              <TextField
-                size="small"
-                label="Cuisine"
-                name="cuisine"
-                value={formData.cuisine}
-                onChange={handleChange}
-                required
-              />
-            </FormControl>
-            <FormControl fullWidth margin="normal">
-              <TextField
-                size="small"
-                select
-                label="Status"
-                name="status"
-                value={formData.status}
-                onChange={handleChange}
-              >
-                <MenuItem value="open">Open</MenuItem>
-                <MenuItem value="closed">Closed</MenuItem>
-              </TextField>
-            </FormControl>
-            <FormControl fullWidth margin="normal">
-              <TextField
-                size="small"
-                label="Image URL"
-                name="image"
-                value={formData.image}
-                onChange={handleChange}
-              />
-            </FormControl>
-            <FormControl fullWidth margin="normal">
-              <TextField
-                size="small"
-                label="Phone"
-                name="contact.phone"
-                value={formData.contact.phone}
-                onChange={handleChange}
-                required
-              />
-            </FormControl>
-            <FormControl fullWidth margin="normal">
-              <TextField
-                size="small"
-                label="Email"
-                name="contact.email"
-                value={formData.contact.email}
-                onChange={handleChange}
-                required
-              />
-            </FormControl>
-            <Box mt={3} textAlign="center">
-              <Button variant="contained" type="submit" color="primary">
-                {isEdit ? "Update Restaurant" : "Add Restaurant"}
-              </Button>
-            </Box>
-          </form>
+  <Grid item xs={12} sm={8} md={6} lg={4}>
+    <Box
+      sx={{
+        p: 4,
+        boxShadow: 3,
+        borderRadius: 2,
+        bgcolor: "background.paper",
+      }}
+    >
+      <Typography variant="h5" component="h2" gutterBottom>
+        {isEdit ? "Edit Restaurant" : "Add New Restaurant"}
+      </Typography>
+      <form onSubmit={handleSubmit}>
+        <FormControl fullWidth margin="normal">
+          <TextField
+            size="small"
+            label="Restaurant Name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </FormControl>
+        <FormControl fullWidth margin="normal">
+          <TextField
+            size="small"
+            label="Cuisine"
+            name="cuisine"
+            value={formData.cuisine}
+            onChange={handleChange}
+            required
+          />
+        </FormControl>
+        <FormControl fullWidth margin="normal">
+          <TextField
+            size="small"
+            select
+            label="Status"
+            name="status"
+            value={formData.status}
+            onChange={handleChange}
+          >
+            <MenuItem value="open">Open</MenuItem>
+            <MenuItem value="closed">Closed</MenuItem>
+          </TextField>
+        </FormControl>
+        <FormControl fullWidth margin="normal">
+          <Button
+            variant="contained"
+            component="label"
+            sx={{ textAlign: "left" }}
+          >
+            Upload Image
+            <input
+              type="file"
+              accept="image/*"
+              hidden
+              onChange={(e) => {
+                const file = e.target.files[0];
+                if (file) {
+                  const reader = new FileReader();
+                  reader.onload = (upload) => {
+                    handleChange({
+                      target: {
+                        name: "image",
+                        value: upload.target.result,
+                      },
+                    });
+                  };
+                  reader.readAsDataURL(file);
+                }
+              }}
+            />
+          </Button>
+        </FormControl>
+        <FormControl fullWidth margin="normal">
+          <TextField
+            size="small"
+            label="Phone"
+            name="contact.phone"
+            value={formData.contact.phone}
+            onChange={handleChange}
+            required
+          />
+        </FormControl>
+        <FormControl fullWidth margin="normal">
+          <TextField
+            size="small"
+            label="Email"
+            name="contact.email"
+            value={formData.contact.email}
+            onChange={handleChange}
+            required
+          />
+        </FormControl>
+        <Box mt={3} textAlign="center">
+          <Button variant="contained" type="submit" color="primary">
+            {isEdit ? "Update Restaurant" : "Add Restaurant"}
+          </Button>
         </Box>
-      </Grid>
-    </Grid>
+      </form>
+    </Box>
+  </Grid>
+</Grid>
   );
 };
 

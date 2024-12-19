@@ -27,6 +27,7 @@ const AllRestaurants = () => {
   };
 
   const handleEditRestaurant = (row) => {
+    console.log(row)
     navigate(`/edit-restaurant`,{state:{data:row}}); 
   };
 

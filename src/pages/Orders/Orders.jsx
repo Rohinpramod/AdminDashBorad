@@ -9,6 +9,18 @@ const Orders = () => {
   
   const orders = orderData?.orders;
 
+  const updateOrderStatus = async (orderId) => {
+    console.log(orderId)
+    try {
+      console.log('tryBlock', orderId)
+      const response = await axiosInstance.patch(`/order/update-order-status/${orderId}`)
+      alert("updated successfully")
+      window.location.reload()
+    } catch (error) {
+      
+    }
+  }
+  
   const columns = [
     {
       name: 'Order ID',
@@ -23,10 +35,6 @@ const Orders = () => {
       selector: row => row.status,
     },
     {
-      name: 'Total Amount',
-      selector: row => row.totalAmount,
-    },
-    {
       name: 'Final Price',
       selector: row => row.finalPrice,
     },
@@ -34,6 +42,25 @@ const Orders = () => {
       name: 'Created At',
       selector: row => new Date(row.createdAt).toLocaleString(),
     },
+    {
+        name: 'Actions',
+        cell: row => (
+          <button
+            onClick={() => updateOrderStatus(row._id)}
+            disabled={row.status === 'delivered'}
+            style={{
+              padding: '6px 12px',
+              backgroundColor: row.status === 'delivered' ? '#ccc' : '#4caf50',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: row.status === 'delivered' ? 'not-allowed' : 'pointer',
+            }}
+          >
+            Update Status
+          </button>
+        ),
+      },
   ];
 
   return (

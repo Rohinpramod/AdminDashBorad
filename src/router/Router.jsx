@@ -14,6 +14,7 @@ import AddItems from "../pages/Menu/AddItems";
 import AddCoupon from "../pages/Coupons/AddCoupon";
 import Orders from "../pages/Orders/Orders";
 import RestaurantsOrders from "../pages/Orders/RestaurantOrders";
+import Payments from "../pages/Payments/Payments";
 
 const AdminRouter = () => {
   return (
@@ -65,6 +66,10 @@ const AdminRouter = () => {
                 <Route 
                   path="/orders/:id"
                   element={< Orders pageTitle="Orders" />}
+                />
+                <Route 
+                  path="/payments"
+                  element={<Payments pageTitle="Payment History" />}
                 />
                 <Route path="*" element={<NotFound pageTitle="404 - Not Found" />} />
               </Routes>

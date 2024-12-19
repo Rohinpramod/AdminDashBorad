@@ -15,6 +15,7 @@ function SideBar() {
     { path: '/all-restaurants', label: 'All MenuItems', icon: <Salad className="w-5 h-5" /> },
     { path: '/coupons', label: 'All Coupons', icon: <TagIcon className="w-5 h-5" /> },
     { path: '/restaurantsOrders', label: 'All Restaurant Orders', icon: <ShoppingCartIcon className="w-5 h-5" /> },
+    { path: '/payments', label: 'Payments', icon: <ShoppingCartIcon className="w-5 h-5"/>},
   ];
 
   return (

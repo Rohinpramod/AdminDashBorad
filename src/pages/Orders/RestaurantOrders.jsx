@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { axiosInstance } from "../../config/axiosInstance";
-import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
+import { useNavigate } from "react-router-dom"; 
 import DataTable from "react-data-table-component";
 import { Pencil, Trash2 } from "lucide-react";
 
@@ -8,7 +8,7 @@ const RestaurantsOrders = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
 
   const fetchRestaurants = async () => {
     try {

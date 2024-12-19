@@ -1,49 +1,56 @@
-import React, { useState } from 'react';
-import { axiosInstance } from '../../config/axiosInstance';
-import { useLocation, useNavigate } from 'react-router';
+import React, { useState } from "react";
+import { axiosInstance } from "../../config/axiosInstance";
+import { useLocation, useNavigate } from "react-router";
 
 const AddCoupon = () => {
-
   const location = useLocation();
   const navigate = useNavigate();
-  const { data } = location.state || {};
+  const { data} = location.state || {};
   const isEdit = Boolean(data);
   const [formData, setFormData] = useState({
-    code: data?.code || '',
-    discountPercentage:data?. discountPercentage || '',
-    maxDiscountValue:data?. maxDiscountValue || '',
-    minOrderValue: data?. minOrderValue || '',
-    expiryDate:data?. expiryDate || ''
+    code: data?.code || "",
+    discountPercentage: data?.discountPercentage || "",
+    maxDiscountValue: data?.maxDiscountValue || "",
+    minOrderValue: data?.minOrderValue || "",
+    expiryDate: data?.expiryDate || "",
   });
-
- 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await isEdit? axiosInstance.put(`/coupon/update-coupon/${data._id}`, formData) :  axiosInstance.post('/coupon/create-coupon', formData);
+      
+      const endpoint = data
+        ? `/coupon/update-coupon/${data._id}`
+        : "/coupon/create-coupon";
+
+      const response = await axiosInstance.post(endpoint, formData);
       if (response.status === 200) {
+
         alert(response?.data?.message);
         setFormData({
-          code: '',
-          discountPercentage: '',
-          maxDiscountValue: '',
-          minOrderValue: '',
-          expiryDate: ''
+          code: "",
+          discountPercentage: "",
+          maxDiscountValue: "",
+          minOrderValue: "",
+          expiryDate: "",
         });
-      } 
+      }
     } catch (error) {
-      alert(`Error: ${error.response ? error.response?.data?.message : error.message}`);
-    }finally{
-        navigate('/coupons')
+      alert(
+        `Error: ${
+          error.response ? error.response?.data?.message : error.message
+        }`
+      );
+    } finally {
+      navigate(-1, { state: { refreshOnReturn: true } });
     }
   };
 
@@ -51,7 +58,9 @@ const AddCoupon = () => {
     <div className="max-w-md mx-auto p-6 bg-gray-800 shadow-md rounded-lg">
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label htmlFor="code" className="block text-white font-medium">Coupon Code</label>
+          <label htmlFor="code" className="block text-white font-medium">
+            Coupon Code
+          </label>
           <input
             type="text"
             id="code"
@@ -62,7 +71,12 @@ const AddCoupon = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="discountPercentage" className="block text-white font-medium">Discount Percentage</label>
+          <label
+            htmlFor="discountPercentage"
+            className="block text-white font-medium"
+          >
+            Discount Percentage
+          </label>
           <input
             type="number"
             id="discountPercentage"
@@ -73,7 +87,12 @@ const AddCoupon = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="maxDiscountValue" className="block text-white font-medium">Maximum Discount Value</label>
+          <label
+            htmlFor="maxDiscountValue"
+            className="block text-white font-medium"
+          >
+            Maximum Discount Value
+          </label>
           <input
             type="number"
             id="maxDiscountValue"
@@ -84,7 +103,12 @@ const AddCoupon = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="minOrderValue" className="block text-white font-medium">Minimum Order Value</label>
+          <label
+            htmlFor="minOrderValue"
+            className="block text-white font-medium"
+          >
+            Minimum Order Value
+          </label>
           <input
             type="number"
             id="minOrderValue"
@@ -95,7 +119,9 @@ const AddCoupon = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="expiryDate" className="block text-white font-medium">Expiry Date</label>
+          <label htmlFor="expiryDate" className="block text-white font-medium">
+            Expiry Date
+          </label>
           <input
             type="date"
             id="expiryDate"
@@ -119,4 +145,3 @@ const AddCoupon = () => {
 };
 
 export default AddCoupon;
-

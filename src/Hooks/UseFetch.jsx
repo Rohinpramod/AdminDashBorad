@@ -8,12 +8,9 @@ const useFetch = (url, params = {}) => {
 
   const fetchData = async () => {
     try {
-      const response = await axiosInstance({
-        url,
-        params, // Pass the query parameters dynamically
-      });
+      setIsLoading(true);
+      const response = await axiosInstance({ url, params });
       setData(response.data);
-      setIsLoading(false);
     } catch (error) {
       setError(error);
     } finally {
@@ -23,9 +20,10 @@ const useFetch = (url, params = {}) => {
 
   useEffect(() => {
     fetchData();
-  }, [url, JSON.stringify(params)]); // Dependencies include URL and parameters
+  }, [url, JSON.stringify(params)]);
 
-  return [data, isLoading, error];
+  return [data, isLoading, error, fetchData];
 };
+
 
 export default useFetch;

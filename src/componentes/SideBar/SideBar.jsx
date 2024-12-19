@@ -13,7 +13,7 @@ function SideBar() {
     { path: '/home', label: 'Dashboard', icon: <HomeIcon className="w-5 h-5" /> },
     { path: '/allrestaurants', label: 'All Restaurants', icon: <ChefHat className="w-5 h-5" /> },
     { path: '/all-restaurants', label: 'All MenuItems', icon: <Salad className="w-5 h-5" /> },
-    { path: '/allcoupons', label: 'All Coupons', icon: <TagIcon className="w-5 h-5" /> },
+    { path: '/coupons', label: 'All Coupons', icon: <TagIcon className="w-5 h-5" /> },
     { path: '/allrestaurantorders', label: 'All Restaurant Orders', icon: <ShoppingCartIcon className="w-5 h-5" /> },
   ];
 

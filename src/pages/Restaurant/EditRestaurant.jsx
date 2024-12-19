@@ -84,6 +84,7 @@ const EditRestaurant = () => {
               <MenuItem value="open">Open</MenuItem>
               <MenuItem value="closed">Closed</MenuItem>
             </TextField>
+            
           </FormControl>
           <FormControl margin="normal">
             <div className="mt-2">

@@ -11,7 +11,7 @@ function DefaultLayout({ children }) {
       <SideBar />
       <Navbar />
       {/* Content area */}
-      <div className="relative flex-1 overflow-y-auto overflow-x-hidden z-50">
+      <div className="relative flex-1 overflow-y-auto">  
         <main className="grow py-20 w-full max-w-9xl mx-auto">
           <BreadCrumb children={children} />
           {children}

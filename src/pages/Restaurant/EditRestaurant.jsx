@@ -36,30 +36,17 @@ const EditRestaurant = () => {
     }));
   };
 
-  const handleContactChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      contact: {
-        ...prev.contact,
-        [name]: value,
-      },
-    }));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // API call logic
     console.log(formData);
-    navigate("/restaurants"); // Navigate back to the list
+    navigate("/restaurants");
   };
 
   return (
     <Grid container spacing={3} justifyContent="center">
       <Grid item xs={12} sm={8} md={6}>
-        <Typography variant="h4" textAlign="center" gutterBottom>
-          {isEdit ? "Edit Restaurant" : "Add Restaurant"}
-        </Typography>
         <form
           onSubmit={handleSubmit}
           className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-4 "

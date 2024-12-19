@@ -23,7 +23,7 @@ const AllRestaurants = () => {
   };
 
   const handleAddRestaurant = () => {
-    navigate("/add-restaurant");
+    navigate("/edit-restaurant");
   };
 
   const handleEditRestaurant = (row) => {
@@ -92,8 +92,8 @@ const AllRestaurants = () => {
   ];
 
   return (
-    <div className="min-h-screen p-6">
-      <div className="max-w-7xl mx-auto bg-white shadow-lg rounded-lg p-6">
+    <div className="h-screen p-6">
+      <div className="max-w-8xl mx-auto bg-white shadow-lg rounded-lg">
         <div className="flex justify-end items-center mb-6">
           <button
             onClick={handleAddRestaurant}

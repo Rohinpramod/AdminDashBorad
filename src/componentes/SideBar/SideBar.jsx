@@ -23,7 +23,7 @@ function SideBar() {
       <div
         className={`bg-gray-900 text-white w-full md:w-64 h-full p-6 fixed md:static transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 transition-transform duration-300 ease-in-out z-50`}
+        } md:translate-x-0 transition-transform duration-300 ease-in-out z-50 overflow-y-auto scrollbar-hide`}
       >
         <div className="text-2xl font-semibold mb-4 text-center">Admin Dashboard</div>
         <ul className="flex flex-col gap-6 mt-20">

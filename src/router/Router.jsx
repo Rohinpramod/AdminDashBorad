@@ -7,8 +7,13 @@ import DefaultLayout from "../layout/DefaultLayout";
 import NotFound from "../componentes/NotFound/NoteFound";
 import EditRestaurant from "../pages/Restaurant/EditRestaurant";
 import AllRestaurant from "../pages/Restaurant/AllRestaurant";
-import MenuItems from "../pages/MenuItems/MenuItems";
-import RestaurantsMenu from "../pages/MenuItems/RestaurantsMenu";
+import MenuItems from "../pages/Menu/MenuItems";
+import RestaurantsMenu from "../pages/Menu/RestaurantsMenu";
+import Coupons from "../pages/Coupons/Coupons";
+import AddItems from "../pages/Menu/AddItems";
+import AddCoupon from "../pages/Coupons/AddCoupon";
+import Orders from "../pages/Orders/Orders";
+import RestaurantsOrders from "../pages/Orders/RestaurantOrders";
 
 const AdminRouter = () => {
   return (
@@ -40,6 +45,26 @@ const AdminRouter = () => {
                  <Route 
                   path="/restautarnt-menu/:id"
                   element={< MenuItems pageTitle="MenuItems" />}
+                />
+                  <Route 
+                    path="/addItems/:id"
+                    element={< AddItems  pageTitle="Add Items" />}
+                  />
+                <Route 
+                  path="/coupons"
+                  element={< Coupons  pageTitle="Coupons" />}
+                />
+                <Route 
+                  path="/add-coupon"
+                  element={< AddCoupon  pageTitle="Add Coupon" />}
+                />
+                <Route 
+                  path="/restaurantsOrders"
+                  element={<RestaurantsOrders  pageTitle="RestaurantsOrders" />}
+                />
+                <Route 
+                  path="/orders/:id"
+                  element={< Orders pageTitle="Orders" />}
                 />
                 <Route path="*" element={<NotFound pageTitle="404 - Not Found" />} />
               </Routes>

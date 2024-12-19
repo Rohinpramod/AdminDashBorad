@@ -7,6 +7,8 @@ import DefaultLayout from "../layout/DefaultLayout";
 import NotFound from "../componentes/NotFound/NoteFound";
 import EditRestaurant from "../pages/Restaurant/EditRestaurant";
 import AllRestaurant from "../pages/Restaurant/AllRestaurant";
+import MenuItems from "../pages/MenuItems/MenuItems";
+import RestaurantsMenu from "../pages/MenuItems/RestaurantsMenu";
 
 const AdminRouter = () => {
   return (
@@ -30,6 +32,14 @@ const AdminRouter = () => {
                 <Route
                   path="/edit-restaurant"
                   element={<EditRestaurant pageTitle="Edit Restaurant" />}
+                />
+                <Route 
+                  path="/all-restaurants-name"
+                  element={< RestaurantsMenu pageTitle="All Restaurants And MenuItems" />}
+                />
+                 <Route 
+                  path="/restautarnt-menu/:id"
+                  element={< MenuItems pageTitle="MenuItems" />}
                 />
                 <Route path="*" element={<NotFound pageTitle="404 - Not Found" />} />
               </Routes>

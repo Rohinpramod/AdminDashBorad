@@ -23,7 +23,7 @@ const AllRestaurants = () => {
   };
 
   const handleAddRestaurant = () => {
-    navigate("/add-restaurant");
+    navigate("/edit-restaurant");
   };
 
   const handleEditRestaurant = (row) => {

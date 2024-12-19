@@ -52,7 +52,7 @@ const RestaurantsMenu = () => {
 
   return (
     <div className="min-h-screen p-6">
-      <div className="max-w-7xl mx-auto bg-white shadow-lg rounded-lg p-6">
+      <div className="max-w-8xl mx-auto bg-white shadow-lg rounded-lg p-6">
         {loading ? (
           <div className="flex justify-center items-center">
             <span className="loading loading-spinner loading-lg"></span>

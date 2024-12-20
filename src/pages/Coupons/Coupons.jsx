@@ -1,13 +1,13 @@
-import React,{useEffect, useState} from 'react';
-import DataTable from 'react-data-table-component';
+import React, { useEffect, useState } from "react";
+import DataTable from "react-data-table-component";
 import useFetch from "../../Hooks/UseFetch";
-import { useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate } from "react-router";
 import { Pencil, Trash2 } from "lucide-react";
-import { axiosInstance } from '../../config/axiosInstance';
-import { formatDate } from '../../utils/Moment';
+import { axiosInstance } from "../../config/axiosInstance";
+import { formatDate } from "../../utils/Moment";
 
 function Coupons() {
-  const [coupons, isLoading, error,fetchData] = useFetch("/coupon/get-coupon");
+  const [coupons, isLoading, error, fetchData] = useFetch("/coupon/get-coupon");
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ function Coupons() {
   };
 
   const handleEditCoupon = (row) => {
-    navigate("/add-coupon", { state: { data: row,refreshOnReturn: true } });
+    navigate("/add-coupon", { state: { data: row, refreshOnReturn: true } });
   };
   useEffect(() => {
     if (location.state?.refreshOnReturn) {
@@ -26,13 +26,15 @@ function Coupons() {
   }, [location.state, fetchData]);
 
   const handleDeleteCoupon = async (id) => {
-    try {
-      const response = await axiosInstance.delete(`/coupon/delete-coupon/${id}`);
-      if (response.status === 200) {
-        window.location.reload(); // Refresh the data
+    if (window.confirm("Are you sure want to  delete coupon")) {
+      try {
+        await axiosInstance.delete(`/coupon/delete-coupon/${id}`);
+
+        alert("coupon deleted successfully");
+        fetchData();
+      } catch (error) {
+        console.error(error.message); // Log the error
       }
-    } catch (error) {
-      console.error(error.message); // Log the error
     }
   };
 
@@ -41,7 +43,7 @@ function Coupons() {
       name: "#",
       selector: (row, index) => index + 1,
       sortable: true,
-      width:"50px"
+      width: "50px",
     },
     {
       name: "Code",
@@ -98,8 +100,13 @@ function Coupons() {
   return (
     <div className="container mx-auto px-4 min-h-screen flex justify-start">
       <div className="w-full">
-        <h1 className="text-3xl font-semibold text-center my-6">Available Coupons</h1>
-        <button onClick={handleAddCoupon} className="mb-4 bg-black text-white px-3 py-2 rounded-lg">
+        <h1 className="text-3xl font-semibold text-center my-6">
+          Available Coupons
+        </h1>
+        <button
+          onClick={handleAddCoupon}
+          className="mb-4 bg-black text-white px-3 py-2 rounded-lg"
+        >
           Add Coupon
         </button>
         {isLoading ? (

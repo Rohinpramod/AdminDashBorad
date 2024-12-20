@@ -13,7 +13,7 @@ const Home = () => {
 
       {/* Welcome Text */}
       <h1 className="text-3xl font-bold text-center text-gray-800">
-        Welcome to the dashboard of <span className="text-red-500">GOURMET FOOD DELIVERY WEBSITE</span>
+        Welcome to the dashboard of <span className="text-red-500">GOURMENT FOOD DELIVERY WEBSITE</span>
       </h1>
     </div>
   );

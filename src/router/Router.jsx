@@ -53,7 +53,7 @@ const AdminRouter = () => {
                   />
                 <Route 
                   path="/coupons"
-                  element={< Coupons  pageTitle="Coupons" />}
+                  element={< Coupons  pageTitle="Available Coupons" />}
                 />
                 <Route 
                   path="/add-coupon"

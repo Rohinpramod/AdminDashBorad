@@ -100,9 +100,7 @@ function Coupons() {
   return (
     <div className="container mx-auto px-4 min-h-screen flex justify-start">
       <div className="w-full">
-        <h1 className="text-3xl font-semibold text-center my-6">
-          Available Coupons
-        </h1>
+        
         <button
           onClick={handleAddCoupon}
           className="mb-4 bg-black text-white px-3 py-2 rounded-lg"

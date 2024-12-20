@@ -1,6 +1,20 @@
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router';
+import { axiosInstance } from '../../config/axiosInstance';
 
 const Navbar = () => {
+
+  const navigate = useNavigate();
+  const location = useLocation(); // Use this to get the current route
+
+  const userLogout = async () => {
+    try {
+      await axiosInstance({ method: "PUT", url: 'user/logout' });
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div className="navbar shadow-lg  bg-white fixed top-0 md:left-64 lg:left-64 right-0 z-40">
       <div className="container mx-auto relative left-3/4 items-center">
@@ -25,7 +39,7 @@ const Navbar = () => {
                 </a>
               </li>
               <li><a>Settings</a></li>
-              <li><a>Logout</a></li>
+              <li><a onClick={userLogout}>Logout</a></li>
             </ul>
           </div>
         </div>

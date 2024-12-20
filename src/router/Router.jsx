@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes, useNavigate } from "react-router";
-import Login from "../componentes/login/Login";
 import Signup from "../componentes/signup/Signup";
 import DefaultLayout from "../layout/DefaultLayout";
 import NotFound from "../componentes/NotFound/NoteFound";
@@ -15,6 +14,7 @@ import Orders from "../pages/Orders/Orders";
 import RestaurantsOrders from "../pages/Orders/RestaurantOrders";
 import Payments from "../pages/Payments/Payments";
 import Home from "../pages/home/Home";
+import Login from "../componentes/login/Login";
 
 const AdminRouter = () => {
   return (

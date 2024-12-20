@@ -55,7 +55,7 @@ const AddItems = () => {
         description: "",
         image: null,
       });
-      navigate(`all-restaurants-name`); // Redirect after success
+      navigate(`/all-restaurants`); // Redirect after success
     } catch (err) {
       setError("Failed to add menu item. " + (err.response?.data?.message || ""));
     }finally{

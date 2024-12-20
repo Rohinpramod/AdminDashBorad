@@ -54,6 +54,17 @@ const AllRestaurants = () => {
       name: "#",
       selector: (row, index) => index + 1,
       sortable: true,
+      width:"100px"
+    },
+    {
+      name: "Photo",
+      selector: (row) => (
+        <div className='p-2'>
+          <img className='w-20 ' src={row.image} />
+        </div>
+      ) ,
+      sortable: true,
+      width: "200px"
     },
     {
       name: "Name",

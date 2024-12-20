@@ -31,6 +31,12 @@ const RestaurantsMenu = () => {
 
   const columns = [
     {
+      name: "#",
+      selector: (row, index) => index + 1,
+      sortable: true,
+      width:"100px"
+    },
+    {
       name: "Restaurant Name",
       selector: (row) => row.name,
       sortable: true,

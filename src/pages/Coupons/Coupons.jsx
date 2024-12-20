@@ -38,6 +38,12 @@ function Coupons() {
 
   const columns = [
     {
+      name: "#",
+      selector: (row, index) => index + 1,
+      sortable: true,
+      width:"50px"
+    },
+    {
       name: "Code",
       selector: (row) => row.code,
       sortable: true,

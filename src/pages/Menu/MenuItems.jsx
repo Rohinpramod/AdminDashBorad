@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom'; // For accessing route parameters
-import { axiosInstance } from '../../config/axiosInstance'; // Axios instance
+import { useNavigate, useParams } from 'react-router-dom'; 
+import { axiosInstance } from '../../config/axiosInstance'; 
 import DataTable from 'react-data-table-component';
+import { Pencil, Trash2 } from 'lucide-react';
 
 const MenuItems = () => {
   const { id } = useParams(); // Get the restaurant ID from the URL
@@ -26,6 +27,23 @@ const MenuItems = () => {
   // Navigate to AddItems page with the restaurant ID
   const handleAddMenuItems = () => {
     navigate(`/addItems/${id}`);
+  };
+ const handleEditMenuItems = (row) => {
+    console.log(row)
+    navigate(`/addItems/${id}`,{state:{data:row}}); 
+  };
+
+  const handleDeleteMenuItems = async (menuId) => {
+    if (window.confirm("Are you sure you want to delete this menu item?")) {
+      try {
+        await axiosInstance.delete(`/restaurant/${id}/${menuId}/deleteMenu`);
+        alert("menu item deleted successfully.");
+        fetchMenuItems()
+
+      } catch {
+        alert("Failed to delete menu item. Please try again.");
+      }
+    }
   };
 
   useEffect(() => {
@@ -56,17 +74,26 @@ const MenuItems = () => {
       sortable: true,
       
     },
-    // {
-    //   name: "Description",
-    //   selector: (row) => row.description,
-    //   sortable: true,
-    //   width: "100px"
-    // },
     {
       name: "Price",
       selector: (row) => `$${row.price}`,
       sortable: true,
       
+    },
+    {
+      name: "Actions",
+      cell: (row) => (
+        <div className="flex space-x-2">
+          <Pencil
+            className="w-4 h-4 text-yellow-500 cursor-pointer"
+            onClick={() => handleEditMenuItems(row)} 
+          />
+          <Trash2
+            className="w-4 h-4 text-red-500 cursor-pointer"
+            onClick={() => handleDeleteMenuItems(row._id)} 
+          />
+        </div>
+      ),
     },
   ];
 

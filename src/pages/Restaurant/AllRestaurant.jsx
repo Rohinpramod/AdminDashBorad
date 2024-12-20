@@ -35,10 +35,9 @@ const AllRestaurants = () => {
     if (window.confirm("Are you sure you want to delete this restaurant?")) {
       try {
         await axiosInstance.delete(`/restaurant/${id}`);
-        setRestaurants((prev) =>
-          prev.filter((restaurant) => restaurant.id !== id)
-        );
         alert("Restaurant deleted successfully.");
+        fetchRestaurants()
+
       } catch {
         alert("Failed to delete restaurant. Please try again.");
       }

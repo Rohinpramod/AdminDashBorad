@@ -37,6 +37,7 @@ const RestaurantsOrders = () => {
       name: "#",
       selector: (row, index) => index + 1,
       sortable: true,
+      width:"200px"
     },
     {
       name: "Restaurant Name",

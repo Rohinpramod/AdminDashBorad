@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router';
 import useFetch from '../../Hooks/UseFetch';
 import DataTable from 'react-data-table-component';
+import { axiosInstance } from '../../config/axiosInstance';
 
 const Orders = () => {
   const { id } = useParams();

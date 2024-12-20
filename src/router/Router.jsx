@@ -14,7 +14,7 @@ import Orders from "../pages/Orders/Orders";
 import RestaurantsOrders from "../pages/Orders/RestaurantOrders";
 import Payments from "../pages/Payments/Payments";
 import Home from "../pages/home/Home";
-import Login from "../componentes/login/Login";
+import Login from "../componentes/Login/Login";
 
 const AdminRouter = () => {
   return (

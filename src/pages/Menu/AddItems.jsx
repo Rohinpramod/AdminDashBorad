@@ -66,13 +66,9 @@ const AddItems = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-lg bg-gray-800  shadow-lg  rounded-lg p-8">
-        <div className="text-center text-white mb-6">
-          
+        <div className="text-center text-white mb-6">     
           <h1 className="text-2xl font-bold mt-4">Add New Menu Item</h1>
-       
         </div>
-
-
         <form onSubmit={handleSubmit} className="space-y-4  rounded-lg">
           <div>
             <label className="block text-sm font-medium text-white">

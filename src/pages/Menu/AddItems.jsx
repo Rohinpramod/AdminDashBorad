@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { axiosInstance } from "../../config/axiosInstance";
-import toast from "react-hot-toast";
+
 const AddItems = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -76,7 +76,7 @@ const AddItems = () => {
         : `restaurant/${id}`;
       const method = isEdit ? "put" : "post";
       await axiosInstance[method](endPoint, payload);
-      toast.success("Menu item added successfully!");
+      setSuccessMessage("Menu item added successfully!");
       setError("");
       setFormData({
         name: "",

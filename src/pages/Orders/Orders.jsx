@@ -15,7 +15,7 @@ const Orders = () => {
     try {
       console.log('tryBlock', orderId)
       const response = await axiosInstance.patch(`/order/update-order-status/${orderId}`)
-      alert("updated successfully")
+      toast.success("updated successfully")
       window.location.reload()
     } catch (error) {
       

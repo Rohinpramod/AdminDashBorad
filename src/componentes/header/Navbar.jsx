@@ -20,8 +20,8 @@ const Navbar = () => {
       <div className="container mx-auto relative left-3/4 items-center">
         <div className="flex-none gap-4">
           <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar relative">
-              <div className="w-12 h-12 rounded-full border-2 border-white">
+            <div tabIndex={0} role="button" className="btn lg:right-24 btn-ghost btn-circle avatar relative">
+              <div className="w-12 h-12 rounded-full border-2 border-white ">
                 <img
                   alt="User Avatar"
                   className="w-full h-full rounded-full object-cover"

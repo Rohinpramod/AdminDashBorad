@@ -15,14 +15,13 @@ function Payments() {
     },
     {
       name: "User",
-      selector: (row) => row.user.name,
+      selector: (row) => row.user?.name,
       sortable: true,
     },
     {
       name: "Amount",
       selector: (row) => row.amount,
       sortable: true,
-      right: true,
     },
     {
       name: "Status",

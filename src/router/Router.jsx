@@ -15,6 +15,7 @@ import RestaurantsOrders from "../pages/Orders/RestaurantOrders";
 import Payments from "../pages/Payments/Payments";
 import Home from "../pages/home/Home";
 import Login from "../componentes/Login/Login";
+import User from "../pages/Users/Users";
 
 const AdminRouter = () => {
   return (
@@ -70,6 +71,10 @@ const AdminRouter = () => {
                 <Route 
                   path="/payments"
                   element={<Payments pageTitle="Payment History" />}
+                />
+                <Route 
+                  path="/users"
+                  element={<User pageTitle="Users" />}
                 />
                 <Route path="*" element={<NotFound pageTitle="404 - Not Found" />} />
               </Routes>

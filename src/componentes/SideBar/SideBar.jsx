@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChefHat, HomeIcon, Salad, ShoppingCartIcon, TagIcon } from "lucide-react";
-
+import { FaUsersLine } from "react-icons/fa6";
 function SideBar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
@@ -16,6 +16,7 @@ function SideBar() {
     { path: '/coupons', label: 'All Coupons', icon: <TagIcon className="w-5 h-5" /> },
     { path: '/restaurantsOrders', label: 'All Restaurant Orders', icon: <ShoppingCartIcon className="w-5 h-5" /> },
     { path: '/payments', label: 'Payments', icon: <ShoppingCartIcon className="w-5 h-5"/>},
+    {path:'/users', label:'Users',icon:<FaUsersLine className='w-5 h-5' />}
   ];
 
   return (
